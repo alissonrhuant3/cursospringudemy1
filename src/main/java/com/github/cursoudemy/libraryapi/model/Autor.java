@@ -31,7 +31,8 @@ public class Autor {
     @Column(name = "nacionalidade", length = 50, nullable = false)
     private String nacionalidade;
 
-    @OneToMany(mappedBy = "autor") // Dentro da entidade Livro, como está mapeado o Autor
+    //@OneToMany(mappedBy = "autor") // Dentro da entidade Livro, como está mapeado o Autor
+    @Transient
     private List<Livro> livros;
 
 }
