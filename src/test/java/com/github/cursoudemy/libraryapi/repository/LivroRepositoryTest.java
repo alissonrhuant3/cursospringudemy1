@@ -33,7 +33,7 @@ class LivroRepositoryTest {
                 .findById(UUID.fromString("1f1a167a-56df-4035-a73d-dd083e350088"))
                 .orElse(null);
 
-        livro.setAutor(new Autor());
+        livro.setAutor(autor);
 
         livroRepository.save(livro);
     }
@@ -76,5 +76,27 @@ class LivroRepositoryTest {
         livro.setAutor(autor);
 
         livroRepository.save(livro);
+    }
+
+    @Test
+    void atualizarAutorLivro() {
+        UUID id = UUID.fromString("ce0541aa-e73f-4845-905a-5cc8d365a57e");
+        var  livroParaAtualizar = livroRepository.findById(id).orElse(null);
+
+        UUID idAutor = UUID.fromString("1f1a167a-56df-4035-a73d-dd083e350088");
+        Autor maria = autorRepository.findById(idAutor).orElse(null);
+
+        livroParaAtualizar.setAutor(maria);
+
+        livroRepository.save(livroParaAtualizar);
+    }
+
+    @Test
+    void deletar() {
+
+        UUID id = UUID.fromString("ce0541aa-e73f-4845-905a-5cc8d365a57e");
+        var  idLivro = livroRepository.findById(id).orElse(null);
+
+        livroRepository.delete(idLivro);
     }
 }
