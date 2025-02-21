@@ -1,7 +1,6 @@
 package com.github.cursoudemy.libraryapi.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -31,8 +30,7 @@ public class Autor {
     @Column(name = "nacionalidade", length = 50, nullable = false)
     private String nacionalidade;
 
-    //@OneToMany(mappedBy = "autor") // Dentro da entidade Livro, como está mapeado o Autor
-    @Transient
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL) // Dentro da entidade Livro, como está mapeado o Autor; Utilizando Cascade para salvar os livros junto com o autor.
     private List<Livro> livros;
 
 }
