@@ -33,7 +33,10 @@ public class Livro {
     private Double preco;
     //private BigDecimal preco;
 
-    @ManyToOne//(cascade = CascadeType.ALL)
+    @ManyToOne(
+            //cascade = CascadeType.ALL
+            fetch = FetchType.LAZY // fetch para informar o tipo de busca se é lazy ou eager, por padrão é eager
+    )
     @JoinColumn(name = "id_autor")
     private Autor autor;
 }

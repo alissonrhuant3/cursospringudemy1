@@ -6,6 +6,7 @@ import com.github.cursoudemy.libraryapi.model.Livro;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -98,5 +99,16 @@ class LivroRepositoryTest {
         var  idLivro = livroRepository.findById(id).orElse(null);
 
         livroRepository.delete(idLivro);
+    }
+
+    @Test
+    @Transactional // utilizando a anotação Transactional para abrir uma transação o que vai dar tempo de realizar a consulta do tipo Lazy.
+    void buscarLivroTest() {
+        UUID id = UUID.fromString("fdee3f9b-6377-4ece-ac14-1c63bbec14a3");
+        Livro livro = livroRepository.findById(id).orElse(null);
+        System.out.println("Livro:");
+        System.out.println(livro.getTitulo());
+        //System.out.println("Autor:");
+        //System.out.println(livro.getAutor().getNome());
     }
 }
