@@ -6,6 +6,7 @@ import com.github.cursoudemy.libraryapi.model.Livro;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -110,6 +111,20 @@ public class AutorRepositoryTest {
         autorRepository.save(autor);
 
 //        livroRepository.saveAll(autor.getLivros()); Salvando sem CASCADE.
+    }
+
+    @Test
+    void listarLivrosAutor() {
+        UUID id = UUID.fromString("6a45a173-635c-4371-8a11-068c959338ea");
+        Autor autor = autorRepository.findById(id).get();
+
+        // buscar os livros do autor
+
+        List<Livro> listaLivros = livroRepository.findByAutor(autor);
+        autor.setLivros(listaLivros);
+
+        autor.getLivros().forEach(System.out::println);
+
     }
 
 }

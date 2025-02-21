@@ -13,7 +13,7 @@ import java.util.UUID;
 @Table(name = "autor", schema = "public")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "livros")
 public class Autor {
 
     @Id
@@ -30,7 +30,7 @@ public class Autor {
     @Column(name = "nacionalidade", length = 50, nullable = false)
     private String nacionalidade;
 
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL) // Dentro da entidade Livro, como está mapeado o Autor; Utilizando Cascade para salvar os livros junto com o autor.
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Dentro da entidade Livro, como está mapeado o Autor; Utilizando Cascade para salvar os livros junto com o autor.
     private List<Livro> livros;
 
 }
